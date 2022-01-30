@@ -7,6 +7,6 @@ O corpo da mensagem
 Botão de texto Url
 @endcomponent
 
-Obrigado,<br>
+Obrigado<br>
 {{ config('app.name') }}
 @endcomponent

@@ -18,11 +18,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify'=>true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
+->name('home')
+->middleware('verified');
 
-Route::resource('tarefas', 'App\Http\Controllers\TarefaController');
+Route::resource('tarefa', 'App\Http\Controllers\TarefaController')->middleware('verified');
 Route::get('/teste', function(){
+    /*
+    Mail::to('lucasdbb.12@gmail.com')->send(new MensagemTesteMail());
+    return 'email enviado';
+    */
     return new MensagemTesteMail();
 });
