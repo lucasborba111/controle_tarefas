@@ -15,6 +15,7 @@
                             <th scope="col">Titulo</th>
                             <th scope="col">Data limite de conclusão</th>
                             <th></th>
+                            <th></th>
                           </tr>
                         </thead>
                         <tbody>

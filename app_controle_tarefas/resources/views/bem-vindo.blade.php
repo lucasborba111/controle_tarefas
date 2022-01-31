@@ -2,7 +2,7 @@
 
 @section('content')
     @auth
-    <h5 style="text-align: center">Bem vindo novamente, vamos nos organizar?</h5>
+    <h5 style="text-align: center">Bem vindo(a) novamente {{auth()->user()->name}}, vamos nos organizar?</h5>
     @endauth
 
     @guest 
