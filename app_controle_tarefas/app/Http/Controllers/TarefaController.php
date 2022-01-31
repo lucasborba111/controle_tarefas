@@ -6,7 +6,6 @@ use App\Mail\NovaTarefaMail;
 use App\Models\Tarefa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-
 class TarefaController extends Controller
 {
 
@@ -20,7 +19,8 @@ class TarefaController extends Controller
      */
     public function index()
     {
-        $tarefas = Tarefa::all();
+        $usuario = auth()->user()->id;
+        $tarefas = Tarefa::where('user_id', $usuario)->paginate(10);
         return view('tarefa.index', ['tarefa'=>$tarefas]);
     }
 
@@ -69,7 +69,13 @@ class TarefaController extends Controller
      */
     public function edit(Tarefa $tarefa)
     {
-        //
+        $usuario = auth()->user()->id;
+        if($tarefa->user_id == $usuario){
+            return view('tarefa.edit', ['tarefa'=>$tarefa]);
+        }
+        else{
+            return view('acesso-negado');
+        }
     }
 
     /**
@@ -81,7 +87,14 @@ class TarefaController extends Controller
      */
     public function update(Request $request, Tarefa $tarefa)
     {
-        //
+        $usuario = auth()->user()->id;
+        if($tarefa->user_id == $usuario){
+            $tarefa->update($request->all());
+        }
+        else{
+            return view('acesso-negado');
+        }
+        return redirect()->route('tarefa.show', ['tarefa'=>$tarefa->id]);
     }
 
     /**
@@ -92,6 +105,14 @@ class TarefaController extends Controller
      */
     public function destroy(Tarefa $tarefa)
     {
-        //
+        $usuario = auth()->user()->id;
+        if($tarefa->user_id == $usuario){
+            $tarefa->delete();
+            return redirect()->route('tarefa.index');
+        }
+        else{
+            return view('acesso-negado');
+        }
+
     }
 }
