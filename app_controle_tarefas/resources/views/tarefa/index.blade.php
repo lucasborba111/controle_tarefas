@@ -14,7 +14,9 @@
                     <div class="col-6">
                       <div class="float-right">
                         <a href="{{route('tarefa.create')}}" class="mr-3">Novo</a> 
-                        <a href="{{route('tarefa.export')}}" class="float-right">XLSX</a>
+                        <a href="{{route('tarefa.export', ['extensao'=>'xlsx'])}}" class="mr-3">XLSX</a>
+                        <a href="{{route('tarefa.export', ['extensao'=>'csv'])}}" class="float-right">CSV</a>
+
                       </div>
                         
                     </div>
