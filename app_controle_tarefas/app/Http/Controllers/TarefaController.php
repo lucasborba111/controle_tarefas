@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\TarefasExport;
 use App\Mail\NovaTarefaMail;
 use App\Models\Tarefa;
 use Illuminate\Http\Request;
@@ -114,5 +115,8 @@ class TarefaController extends Controller
             return view('acesso-negado');
         }
 
+    }
+    public function export(){
+            return Excel::download(new TarefasExport, 'lista_de_tarefas.xlsx');
     }
 }
